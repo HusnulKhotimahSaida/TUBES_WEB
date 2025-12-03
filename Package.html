@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Paket Trip — Final</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 10px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid orange;
+    background: rgba(255, 255, 255, 0.686);
+
+    }
+
+    
+    .logo img,
+    .logo-img {
+        height: 70px;   
+        width: auto;
+        object-fit: contain;
+        cursor: pointer;
+    }
+
+
+    .nav-links {
+        display: flex;
+        gap: 35px;
+        align-items: center;
+        list-style: none;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #000000;
+        font-size: 15px;
+        transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: #0c8c70;
+    }
+
+    /* BUTTON NAVBAR */
+    .btn {
+        background-color: #f7573d;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #d94a34;
+    }
+  :root{
+    --photo-h:330px;   
+    --gap:0px;        
+    --accent:#ff7a00;
+    --muted:#64748b;
+    --card-radius:10px;
+  }
+
+  body{
+    background: #EBF2FF;
+    font-family:system-ui, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  .wrap{ max-width:1200px; margin:36px auto; padding:0 18px; }
+
+ 
+  .row.g-5 { gap: 10px; }
+
+  .tour-card{
+    position:relative;
+    border-radius:var(--card-radius);
+    background:#fff;
+    box-shadow:0 6px 18px rgba(15,23,42,.06);
+    transition: transform .18s ease, box-shadow .18s ease;
+    display:block;
+    cursor:pointer;
+    overflow:visible;
+    outline:none;
+  }
+  .tour-card:focus{ box-shadow:0 12px 30px rgba(15,23,42,.12); }
+
+ 
+  .photo{
+    height:var(--photo-h);
+    position:relative;
+    overflow:hidden;
+    border-top-left-radius:var(--card-radius);
+    border-top-right-radius:var(--card-radius);
+    background: #ffffff;  
+    padding:6px; 
+  }
+  .photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition: transform .45s ease, filter .45s ease;
+  }
+
+
+  .info{
+    position:absolute;
+    left:var(--gap);
+    right:var(--gap);
+    bottom:var(--gap);
+    background: rgba(255,255,255,0.96);
+    border-radius:8px;
+    padding:10px 12px;
+    box-shadow:0 10px 26px rgba(2,6,23,0.06);
+    box-sizing:border-box;
+    overflow:hidden;
+    max-height:50px;
+
+ 
+    transition: max-height .75s ease, padding .55s ease;
+    pointer-events:none;
+}
+
+
+  .info-inner{ display:flex; flex-direction:column; gap:8px; }
+  .info .title{ font-weight:700; color:#0f172a; font-size:0.98rem; line-height:1.15; }
+  .info .meta{ color:var(--muted); font-size:.9rem; }
+
+
+  .tour-card:hover .info,
+  .tour-card:focus .info,
+  .tour-card.show-info .info{
+    max-height: 500px;
+  }
+
+
+  .tour-card:hover .photo img,
+  .tour-card:focus .photo img,
+  .tour-card.show-info .photo img{
+    transform: scale(1.08);
+    filter: brightness(.48);
+  }
+
+
+  .card-footer-space { height:12px; }
+
+
+  @media (max-width:576px){
+    :root{ --photo-h:150px; }
+    .info{ transition:none; } 
+  }
+
+
+  @media (prefers-reduced-motion: reduce){
+    .photo img, .info { transition:none !important; transform:none !important; }
+  }
+
+
+  .col { display:flex; }
+  .col > .tour-card { flex:1; display:block; border-radius: var(--card-radius); overflow:hidden; }
+</style>
+</head>
+<body>
+   <header class="navbar">
+         <div class="logo"><img src="assets/logo.png" class="logo-img"></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a class="nav-link" href="">Travel Packages</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><button class="btn">Masuk Admin</button></li>
+        </ul>
+   </header>
+  <div class="wrap">
+            <h2 style="margin-bottom:6px;margin-top:120px; font-weight:700; text-align:center;">
+          Paket Tour Sejarah Islam Dunia<br>
+          <span style="font-size:22px; color:#475569; font-weight:500;">
+            جولات في معالم التاريخ الإسلامي حول العالم
+          </span>
+        </h2>
+
+        <p style="color:#475569;margin-bottom:18px; text-align:center;">
+          Jelajahi jejak para Nabi, sahabat, dan peradaban Islam dari Timur Tengah hingga Eropa dalam perjalanan penuh makna.<br>
+        </p>
+
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+
+          <div class="col">
+          <article class="tour-card" tabindex="0" >
+          <div class="photo">
+            <img src="assets/tour-gambarr1.jpg" alt="Laut Mati Yordania">
+
+  
+            <div class="info" aria-hidden="true">
+              <div class="info-inner">
+
+              <div class="title">Piramida (Mesir) — Keajaiban Dunia & Jejak Nabi</div>
+
+              <div class="meta">📅 20 Maret 2026</div>
+              <div class="meta">⏱ 6 Days</div>
+              <div class="meta" style="font-weight:700; color:#d97706;">
+                  💳 Harga: Rp 27.500.000 / pax
+              </div>
+
+              <div class="meta">📍 Mesir — Giza, Kairo & Sekitar Sungai Nil</div>
+
+              <div class="meta">
+                📜 Nilai Sejarah:
+                <ul style="margin:6px 0 0 18px; padding:0;">
+                  <li>Lokasi Piramida Giza & Sphinx</li>
+                  <li>Jejak peninggalan Firaun </li>
+                  <li>Kota Kairo sebagai pusat peradaban Islam</li>
+                </ul>
+              </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </article>
+      </div>
+
+
+
+      <div class="col">
+        <article class="tour-card" tabindex="0">
+          <div class="photo">
+            <img src="assets/tour-gambar2" alt="Paket Vietnam">
+            <div class="info" aria-hidden="true">
+              <div class="title">Sarajevo & Mostar (Bosnia) — Jejak Islam di Eropa</div>
+
+                  <div class="meta">📅 15 Juli 2026</div>
+                  <div class="meta">⏱ 7 Days</div>
+                  <div class="meta" style="font-weight:700; color:#d97706;">
+                    💳 Harga: Rp 27.500.000 / pax
+                  </div>
+
+
+                  <div class="meta">📍 Bosnia & Herzegovina — Sarajevo, Mostar, Travnik</div>
+
+                  <div class="meta">
+                    📜 Nilai Sejarah:
+                    <ul style="margin:6px 0 0 18px; padding:0;">
+                      <li>Kota Tua Baščaršija — jejak peradaban Islam abad ke-16</li>
+                      <li>Jembatan Stari Most — simbol persatuan Muslim Bosnia</li>
+                      <li>Jejak Perang Bosnia & kebangkitan umat Islam Eropa</li>
+                    </ul>
+                  </div>
+
+            </div>
+          </div>
+        </article>
+      </div>
+
+
+      <div class="col">
+        <article class="tour-card" tabindex="0" >
+          <div class="photo">
+            <img src="assets/tour-gambar3.jpg" alt="Tour Disneyland">
+            <div class="info" aria-hidden="true">
+             <div class="title">Ethiopia (Afrika Utara) — Jejak Hijrah Pertama</div>
+              <div class="meta">📅 10 April 2026</div>
+              <div class="meta">⏱ 7 Days</div>
+
+              <div class="meta" style="font-weight:700; color:#d97706;">
+                💳 Harga: Rp 22.800.000 / pax
+              </div>
+              <div class="meta">📍 Ethiopia — Desa Negash, Mekelle, & Makam Raja Najasyi</div>
+
+              <div class="meta">
+                📜 Nilai Sejarah:
+                <ul style="margin:6px 0 0 18px; padding:0;">
+                  <li>Lokasi Hijrah Pertama sahabat pada masa Rasulullah ﷺ</li>
+                  <li>Masjid Al-Nejashi — masjid tertua di Afrika Timur</li>
+                  <li>Situs desa Muslim Negash yang menjadi pusat dakwah awal</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </article>
+      </div>
+
+   
+      <div class="col">
+        <article class="tour-card" tabindex="0" >
+          <div class="photo">
+            <img src="assets/tour-gambar4.avif" alt="Tour Wangxian">
+            <div class="info" aria-hidden="true">
+              <div class="info-inner">
+                <div class="title">Istanbul (Turki) — Jejak Khilafah Utsmani</div>
+
+                <div class="meta">📅 12 Mei 2026</div>
+                <div class="meta">⏱ 7 Days</div>
+
+                <div class="meta" style="font-weight:700; color:#d97706;">
+                  💳 Harga: Rp 25.200.000 / pax
+                </div>
+
+                <div class="meta">📍 Turki — Istanbul, Eyüp, Bosphorus</div>
+
+                <div class="meta">
+                📜 Nilai Sejarah:
+                <ul style="margin:6px 0 0 18px; padding:0;">
+                  <li>Topkapi Palace — peninggalan pedang & rambut Nabi ﷺ</li>
+                  <li>Masjid Biru (Sultan Ahmed)</li>
+                  <li>Bosphorus — pemisah dua benua</li>
+                </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+       
+      <div class="col">
+        <article class="tour-card" tabindex="0" >
+          <div class="photo">
+            <img src="assets/tour-gambar5.webp" alt="Jejak Rasul - Madinah & Makkah">
+            <div class="info" aria-hidden="true">
+              <div class="info-inner">
+                <div class="title">Universitas Al-Azhar (Mesir) — Pusat Keilmuan Islam Dunia</div>
+
+                    <div class="meta">📅 12 April 2026</div>
+                    <div class="meta">⏱ 6 Days</div>
+
+                    <div class="meta" style="font-weight:700; color:#d97706;">
+                      💳 Harga: Rp 20.900.000 / pax
+                    </div>
+
+                    <div class="meta">📍 Mesir — Kairo, Universitas Al-Azhar</div>
+
+                    <div class="meta">
+                    📜 Nilai Sejarah:
+                    <ul style="margin:6px 0 0 18px; padding:0;">
+                      <li>Didirikan tahun 970 M oleh Dinasti Fatimiyah</li>
+                      <li>Pusat rujukan ilmu fikih dan tafsir</li>
+                      <li>Lembaga Islam paling berpengaruh di dunia</li>
+                    </ul>
+                    </div>
+
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+    
+      <div class="col">
+        <article class="tour-card" tabindex="0">
+          <div class="photo">
+            <img src="assets/tour-gambarr6.jpg" alt="Jejak Ulama & Pesantren">
+            <div class="info" aria-hidden="true">
+              <div class="info-inner">
+                <div class="title">Hebron (Palestina) — Makam Para Nabi (Ibrahim, Ya'qub)</div>
+
+                  <div class="meta">📅 3 Juli 2026</div>
+                  <div class="meta">⏱ 6 Days</div>
+
+                  <div class="meta" style="font-weight:700; color:#d97706;">
+                    💳 Harga: Rp 29.500.000 / pax
+                  </div>
+
+                  <div class="meta">📍 Palestina — Hebron & Cave of the Patriarchs</div>
+
+                  <div class="meta">
+                  📜 Nilai Sejarah:
+                  <ul style="margin:6px 0 0 18px; padding:0;">
+                    <li>Lokasi makam Nabi Ibrahim a.s</li>
+                    <li>Makam Nabi Ya’qub a.s & istrinya</li>
+                    <li>Salah satu tempat suci tertua dalam sejarah manusia</li>
+                  </ul>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+    
+      <div class="col">
+        <article class="tour-card" tabindex="0" data-href="package.html" aria-label="Tour Sejarah Islam - Nusantara">
+          <div class="photo">
+            <img src="assets/tour-gambar7.webp" alt="Sejarah Islam Nusantara">
+            <div class="info" aria-hidden="true">
+              <div class="info-inner">
+                <div class="title">Gunung Sinai (Mesir) — Nabi Musa a.s Berdialog Dengan Allah</div>
+
+                    <div class="meta">📅 18 Maret 2026</div>
+                    <div class="meta">⏱ 5 Days</div>
+
+                    <div class="meta" style="font-weight:700; color:#d97706;">
+                      💳 Harga: Rp 19.800.000 / pax
+                    </div>
+
+                    <div class="meta">📍 Mesir — Gunung Sinai, Jabal Musa</div>
+
+                    <div class="meta">
+                    📜 Nilai Sejarah:
+                    <ul style="margin:6px 0 0 18px; padding:0;">
+                      <li>Nabi Musa a.s menerima wahyu</li>
+                      <li>Lembah Thuwa — lokasi Nabi Musa melepas sandal sebelum berdialog</li>
+                      <li>Rute perjalanan Bani Israil setelah keluar dari Mesir</li>
+                    </ul>
+                    </div>
+
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+  
+      <div class="col">
+        <article class="tour-card" tabindex="0" data-href="package.html" aria-label="Tour Sejarah Islam - Umrah Ziarah">
+          <div class="photo">
+            <img src="assets/tour-gambar8.jpg" alt="Umrah Ziarah Ringan">
+            <div class="info" aria-hidden="true">
+              <div class="info-inner">
+                <div class="title">Samarkand (Uzbekistan) — Permata Sejarah Islam</div>
+
+                <div class="meta">📅 10 September 2026</div>
+                <div class="meta">⏱ 7 Days</div>
+
+                <div class="meta" style="font-weight:700; color:#d97706;">
+                  💳 Harga: Rp 31.500.000 / pax
+                </div>
+
+                <div class="meta">📍 Uzbekistan — Samarkand, Bukhara, Registan Square</div>
+
+                <div class="meta">
+                📜 Nilai Sejarah:
+                <ul style="margin:6px 0 0 18px; padding:0;">
+                  <li>Registan Square — pusat ilmu Islam terindah di dunia</li>
+                  <li>Mausoleum Imam Bukhari — ahli hadis terbesar</li>
+                </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+
+      
+    </div>
+
+    <div class="card-footer-space"></div>
+  </div>
+
+
+   <iframe src="contact.html" 
+        width="100%" 
+        height="650px" 
+        frameborder="0" 
+        scrolling="no" 
+        title="contact">
+</iframe>
+
+
+  <iframe src="footer.html" 
+        width="100%" 
+        height="95px" 
+        frameborder="0" 
+        scrolling="no" 
+        title="Travel">
+</iframe>
+
+
+</body>
+</html>
